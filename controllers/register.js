@@ -4,14 +4,14 @@ import Register from "../models/RegisterInvasion.js";
 // @route   POST /api/register
 export const createRegistration = async (req, res) => {
   try {
-    const { name, email, phone, church, event } = req.body;
+    const { name, email, phone, church, event, address } = req.body;
 
     const existing = await Register.findOne({ email });
     if (existing) {
       return res.status(400).json({ message: "You already registered." });
     }
 
-    const newRegister = await Register.create({ name, email, phone, church, event });
+    const newRegister = await Register.create({ name, email, phone, church, event, address });
 
     res.status(201).json({newRegister, message: "Registration successful"});
   } catch (error) {
